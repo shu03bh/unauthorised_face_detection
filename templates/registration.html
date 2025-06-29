@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="#" class="logo">Safe Frame</a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <button class="btn-register" onclick="window.location.href='{{ url_for('authenticate') }}';">Authenticate</button>
+    </div>
+
+    <header>
+        <h1>Register yourself</h1>
+    </header>
+    <main>
+        <form method="POST" action="{{ url_for('register') }}">
+            <label for="name">Enter Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            <p>Click "Open Camera" to take a picture:</p>
+            <button type="button" id="camera-button">Open Camera</button>
+            <video id="video" autoplay muted></video>
+            <canvas id="canvas" style="display:none;"></canvas>
+            <input type="hidden" id="captured-image" name="captured_image">
+            <button type="submit" id="submit-button">Submit</button>
+        </form>
+    </main>
+    <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    <script>
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('canvas');
+      const capturedImageInput = document.getElementById('captured-image');
+      const cameraButton = document.getElementById('camera-button');
+      const submitButton = document.getElementById('submit-button');
+
+      cameraButton.addEventListener('click', async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+          video.srcObject = stream;
+        } catch (error) {
+          alert("Error accessing camera: " + error.message);
+        }
+      });
+
+      submitButton.addEventListener('click', (event) => {
+        if (!video.srcObject) {
+          alert("Please open the camera before submitting.");
+          event.preventDefault();
+          return;
+        }
+
+        const context = canvas.getContext('2d');
+        canvas.width = video.videoWidth / 2;
+        canvas.height = video.videoHeight / 2;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const dataURL = canvas.toDataURL('image/jpeg', 0.7);
+        capturedImageInput.value = dataURL;
+
+        const stream = video.srcObject;
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+        video.srcObject = null;
+      });
+    </script>
+</body>
+</html>

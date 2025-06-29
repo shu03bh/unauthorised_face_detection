@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Frame</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="#" class="logo">Safe Frame</a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+        <button class="btn-register" onclick="window.location.href='{{ url_for('register') }}';">Register</button>
+
+    </div>
+
+    <!-- Header Section -->
+    <div id="home" class="header">
+        <h1>Welcome to Safe Frame!</h1>
+        <h2>Your safety, our priority</h2>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content-section">
+    <img src="static/image/home.png" alt="Authentication Illustration">
+    <div class="text-content">
+
+        <h2>Simplify Security. Amplify Safety. Embrace the Future.</h2>
+
+        <p>With cutting-edge facial recognition, we ensure your world stays safe and secure.</p>
+        <p>Experience seamless authentication that puts privacy and security at the forefront.</p>
+        <button class="btn-learn-more">Learn More</button>
+    </div>
+    </div>
+
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+    <h2>Why Us?</h2>
+    <div class="about-content">
+        <div class="about-text">
+            <p>
+                Welcome to <strong>Safe Frame</strong>, your trusted partner in advanced security solutions. Our system leverages cutting-edge facial recognition technology to ensure the highest level of safety and efficiency.
+            </p>
+            <p>
+                Here's how Safe Frame works:
+            </p>
+            <ul>
+                <li><strong>Register New Users:</strong> Authorized users are securely registered into the system using state-of-the-art AI algorithms.</li>
+                <li><strong>Grant Access to Authorized Users:</strong> When a registered user attempts access, the system seamlessly verifies their identity and grants permission.</li>
+                <li><strong>Alert on Unauthorized Access:</strong> If an unregistered or unauthorized user attempts access, an immediate alert is triggered to ensure security.</li>
+            </ul>
+            <p>
+                <b>Safe Frame</b> is designed to redefine security standards, offering robust protection, seamless user experiences, and peace of mind in every interaction.
+            </p>
+
+        </div>
+        <div class="about-image">
+            <img src="static/image/about.png" alt="About Safe Frame">
+        </div>
+    </div>
+    </section>
+
+
+
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <h2>Our Services</h2>
+        <div class="service-card">
+        <div class="service-image-wrapper">
+            <img src="static/image/register.png" alt="Register" class="service-image">
+        </div>
+        <div class="service-content">
+          <h3>Registration</h3>
+          <button class="service-button">
+            <a href="{{ url_for('register') }}" style="text-decoration: none; color: white;">Register</a>
+          </button>
+
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image-wrapper">
+          <img src="static/image/authenticate.png" alt="Authenticate" class="service-image">
+        </div>
+        <div class="service-content">
+          <h3>Authentication</h3>
+          <button class="service-button">
+              <a href="{{ url_for('authenticate') }}"style="text-decoration: none; color: white;">Authenticate</a>
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact-us" class="contact-section">
+      <div class="contact-card">
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! Feel free to reach out for any inquiries or feedback.</p>
+
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" placeholder="Type your message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="contact-button">Send Message</button>
+        </form>
+      </div>
+
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p>Email: contact@example.com</p>
+        <p>Phone: +1 (123) 456-7890</p>
+        <p>Address: 123 Main Street, City, Country</p>
+      </div>
+    </section>
+
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2024 Safe Frame. Built with 💙 by <a href="#">Your Name</a></p>
+    </div>
+
+    <!--=============== MAIN JS ===============-->
+   <script type = "text/javascript" src = "{{url_for('static', filename = 'script/main.js')}}"></script>
+</body>
+</html>
